@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jo Patrick Scheifele · Test Engineer & Analog Photographer</title>
+  <meta name="description" content="Portfolio of Jo Patrick Scheifele – mechanical engineering master's student, working student in R&amp;D at ABB, trained automotive mechatronics technician and analog photographer.">
+  <meta name="theme-color" content="#f5f5f3">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preload" href="assets/fonts/instrument-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="nav__brand" href="#hero" aria-label="Back to top">
+        <span class="nav__brand-mark" aria-hidden="true">⌖</span>
+        <span class="nav__brand-text">J.&nbsp;P.&nbsp;Scheifele</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu">
+        <li><a class="nav__link" href="#about"><span class="nav__idx">01</span>About</a></li>
+        <li><a class="nav__link" href="#experience"><span class="nav__idx">02</span>Experience</a></li>
+        <li><a class="nav__link" href="#projects"><span class="nav__idx">03</span>Projects</a></li>
+        <li><a class="nav__link" href="#gallery"><span class="nav__idx">04</span>Photography</a></li>
+        <li><a class="nav__link" href="#contact"><span class="nav__idx">05</span>Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <svg class="hero__lissajous" viewBox="-110 -110 220 220" aria-hidden="true" focusable="false">
+        <path id="lissajous-path" d=""></path>
+      </svg>
+
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Test Engineer · Mechanical Engineering · Analog Photography</p>
+          <h1 class="hero__title" id="hero-title">
+            Jo Patrick<br><em>Scheifele</em>
+          </h1>
+          <p class="hero__tagline">
+            I test, document, and evaluate. Just what an engineer does.
+            In between, I expose 36&nbsp;frames on film.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#projects">View projects</a>
+            <a class="btn btn--ghost" href="#contact">Get in touch</a>
+          </div>
+          <dl class="hero__specs">
+            <div><dt>Currently</dt><dd>Working student, R&amp;D @ ABB</dd></div>
+            <div><dt>Studying</dt><dd>M.Sc. Mechanical Eng.</dd></div>
+            <div><dt>Based in</dt><dd>Düsseldorf, DE</dd></div>
+          </dl>
+        </div>
+
+        <figure class="hero__portrait">
+          <img src="assets/img/portrait.jpg" alt="Portrait of Jo Patrick Scheifele" width="933" height="1167">
+          <!-- Technical dimension lines (decoration) -->
+          <span class="dim dim--h" aria-hidden="true"><span>320</span></span>
+          <span class="dim dim--v" aria-hidden="true"><span>400</span></span>
+          <figcaption class="hero__caption">FIG. 01 — Portrait, Berlin, 35&nbsp;mm</figcaption>
+        </figure>
+      </div>
+
+      <a class="hero__scroll" href="#about" aria-label="Scroll down">
+        <span>scroll</span>
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">01</span>
+          <h2 class="section__title" id="about-title">About <em>me</em></h2>
+        </header>
+
+        <div class="about">
+          <div class="about__text reveal">
+            <p class="lead">
+              Mechanical engineering master's student with a hands-on background as a
+              trained automotive mechatronics technician.
+            </p>
+            <p>
+              I started out with a four-year apprenticeship in a Swiss workshop, then moved on to
+              study automotive engineering in Cologne. Today I'm doing my master's in mechanical
+              engineering in Düsseldorf and working in R&amp;D at ABB in Ratingen.
+            </p>
+            <p>
+              My work revolves around test setups &ndash; from preparation and execution to analysis
+              and documentation. I've helped build and commission test rigs, tested engines, heat
+              pumps, compressors and safety-relevant chassis components, and validated driver
+              assistance functions. I analyse measurement data in a structured way and automate the
+              analysis wherever it pays off, mostly with Python and MATLAB.
+            </p>
+          </div>
+
+          <aside class="about__skills reveal" aria-label="Skills">
+            <div class="skill-group">
+              <h3 class="skill-group__title">Testing &amp; Validation</h3>
+              <ul class="tags">
+                <li>Test rig setup &amp; commissioning</li><li>Test execution</li>
+                <li>Component testing</li><li>ADAS validation</li>
+                <li>Data analysis &amp; reporting</li><li>Technical drawing</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 class="skill-group__title">Software &amp; Tools</h3>
+              <ul class="tags">
+                <li>Python</li><li>PyQt5</li><li>YOLO / Ultralytics</li>
+                <li>MATLAB &amp; Simulink</li><li>CATIA V5</li><li>FreeCAD</li><li>MS Office</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 class="skill-group__title">Languages</h3>
+              <ul class="tags">
+                <li>German · native</li><li>English · fluent</li><li>French · basic</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <h3 class="skill-group__title">Off the clock</h3>
+              <ul class="tags">
+                <li>Analog photography</li><li>Music &amp; concerts</li><li>AI &amp; software</li><li>Yoga</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">02</span>
+          <h2 class="section__title" id="experience-title">Experi<em>ence</em></h2>
+        </header>
+
+        <h3 class="subhead reveal">Work</h3>
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>Oct 2026 – Present</time>
+              <span class="timeline__type">Working student</span>
+            </div>
+            <div class="timeline__body">
+              <h4>Test Engineer, R&amp;D <span>@ ABB · Ratingen</span></h4>
+              <p>Working student in the research &amp; development department at the Ratingen site.</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>Apr 2026 – Sep 2026</time>
+              <span class="timeline__type">Working student</span>
+            </div>
+            <div class="timeline__body">
+              <h4>Test &amp; Validation <span>@ Rhythm Automotive GmbH</span></h4>
+              <ul class="timeline__list">
+                <li>Independent component tests on safety-relevant chassis parts (control arms, tie rods) on a uniaxial tension/compression testing machine (Instron).</li>
+                <li>Prepared test setups, monitored test series, analysed and documented results.</li>
+                <li>Contributed to multi-axial test rigs and setups on strong floors.</li>
+              </ul>
+              <ul class="tags tags--small"><li>Chassis</li><li>Instron</li><li>Component testing</li></ul>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>Aug 2024 – Mar 2026</time>
+              <span class="timeline__type">Intern · Thesis · Working student</span>
+            </div>
+            <div class="timeline__body">
+              <h4>Development &amp; Testing <span>@ AVL-Schrick GmbH</span></h4>
+              <ul class="timeline__list">
+                <li>Built and commissioned test rigs during my mandatory internship in development &amp; testing.</li>
+                <li>Tests on combustion engines, heat pumps and compressor systems; validation of driver assistance functions.</li>
+                <li>Bachelor thesis: Python tool for automated video analysis using YOLO-based object detection &ndash; cut analysis effort by up to 80&nbsp;%.</li>
+              </ul>
+              <ul class="tags tags--small"><li>Test rigs</li><li>Heat pumps</li><li>ADAS</li><li>Python</li><li>YOLO</li><li>Object Detection</li></ul>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>2019 – 2020</time>
+              <span class="timeline__type">Civilian service</span>
+            </div>
+            <div class="timeline__body">
+              <h4>Civilian service <span>@ Stiftung Blumenrain · CH</span></h4>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>2015 – 2019</time>
+              <span class="timeline__type">Apprenticeship</span>
+            </div>
+            <div class="timeline__body">
+              <h4>Automotive Mechatronics Technician <span>@ Garage Hollenstein AG · CH</span></h4>
+              <p>Four-year vocational training in Switzerland, completed with the Federal VET Diploma (EFZ).</p>
+            </div>
+          </li>
+        </ol>
+
+        <h3 class="subhead reveal">Education</h3>
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>Oct 2025 – Present</time>
+              <span class="timeline__type">Master</span>
+            </div>
+            <div class="timeline__body">
+              <h4>M.Sc. Mechanical Engineering <span>@ Hochschule Düsseldorf</span></h4>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>Oct 2020 – Jul 2025</time>
+              <span class="timeline__type">Bachelor</span>
+            </div>
+            <div class="timeline__body">
+              <h4>B.Eng. Automotive Engineering <span>@ TH Köln</span></h4>
+              <p>Thesis on AI-based automated video analysis, written at AVL-Schrick.</p>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__meta">
+              <time>2015 – 2019</time>
+              <span class="timeline__type">Baccalaureate</span>
+            </div>
+            <div class="timeline__body">
+              <h4>Technical Vocational Baccalaureate (BM1) <span>@ GIBS Liestal · CH</span></h4>
+              <p>Equivalent to the German Fachhochschulreife, completed alongside the apprenticeship.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">03</span>
+          <h2 class="section__title" id="projects-title">Pro<em>jects</em></h2>
+        </header>
+
+        <div class="projects">
+          <article class="project reveal">
+            <div class="project__media"><img src="assets/img/projects/bachelor-thesis-card.jpg" alt="Bar chart: automated evaluation cuts the time required by 80 % in structured and 70 % in field testing" loading="lazy"></div>
+            <div class="project__body">
+              <p class="project__meta">Bachelor thesis · Object Detection</p>
+              <h3 class="project__title">AI-based Video Analysis</h3>
+              <p>
+                A Python tool that automatically evaluates test videos using YOLO-based object
+                detection. It replaces manual frame-by-frame review and cut the analysis effort
+                by up to <strong>80&nbsp;%</strong>.
+              </p>
+              <ul class="tags tags--small"><li>Object Detection</li><li>YOLO</li><li>Ultralytics</li><li>Python</li></ul>
+              <div class="project__links">
+                <a href="projects/bachelor-thesis.html" class="link-arrow">Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__media"><img src="assets/img/projects/camera-model/card.jpg" alt="Simscape render of the five-blade iris diaphragm, partly closed" loading="lazy"></div>
+            <div class="project__body">
+              <p class="project__meta">Course project · Multibody Simulation</p>
+              <h3 class="project__title">Camera Model in Simscape</h3>
+              <p>
+                A 1984 Canon T70 rebuilt in Simscape Multibody: shutter, focus, aperture and film
+                transport &ndash; seven degrees of freedom, each result checked against hand
+                calculations and published data.
+              </p>
+              <ul class="tags tags--small"><li>MATLAB</li><li>Simscape Multibody</li><li>Kinematics</li><li>Verification</li></ul>
+              <div class="project__links">
+                <a href="projects/camera-model.html" class="link-arrow">Read the write-up</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__media"><img src="assets/img/projects/e46/card.jpg" alt="Silver BMW E46 convertible with Alpina wheels, front three-quarter view on film" loading="lazy"></div>
+            <div class="project__body">
+              <p class="project__meta">Personal · Garage</p>
+              <h3 class="project__title">BMW E46 330Ci</h3>
+              <p>
+                My 2002 convertible, owned since 2018 and kept on the road with my own hands:
+                a new sound system, ST coilovers, Alpina wheels and a long list of repairs.
+              </p>
+              <ul class="tags tags--small"><li>Maintenance</li><li>Car Audio</li><li>Suspension</li><li>Hands-on</li></ul>
+              <div class="project__links">
+                <a href="projects/bmw-e46.html" class="link-arrow">See the car</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PHOTOGRAPHY ============ -->
+    <section class="section section--gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">04</span>
+          <h2 class="section__title" id="gallery-title">Photo<em>graphy</em></h2>
+          <p class="section__sub">Shot on film, 35&nbsp;mm. Click an image to enlarge.<br>
+            All photos © Jo Patrick Scheifele &ndash; please don't use them without asking.</p>
+        </header>
+
+        <div class="filmstrip" aria-hidden="true">
+          <span>▸</span><span>24</span><span>24A</span><span>25</span><span>25A</span><span>26</span><span>26A</span><span>27</span><span>▸</span>
+        </div>
+
+        <!--
+          GALLERY – how to add images:
+          <figure class="shot shot--wide">                 (size: shot--wide | shot--tall | shot--big | none = normal)
+            <img src="assets/img/gallery/01.jpg" alt="Description" loading="lazy">
+            <figcaption>Location · Film · Year</figcaption>
+          </figure>
+          Videos: use <video src="assets/video/clip.mp4" muted loop playsinline preload="metadata"></video> instead of <img>.
+        -->
+        <div class="gallery" id="gallery-grid">
+          <figure class="shot shot--big">
+            <img src="assets/img/gallery/01.jpg" alt="Goethe monument with marble figures in the Tiergarten, backlit by evening sun" loading="lazy">
+            <figcaption>Goethe Monument · Tiergarten, Berlin</figcaption>
+          </figure>
+          <figure class="shot shot--wide">
+            <img src="assets/img/gallery/02.jpg" alt="Steel arch bridge over the high-water Rhine, city skyline in the distance" loading="lazy">
+            <figcaption>Rhine · Cologne</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/img/gallery/03.jpg" alt="Small mint-green car parked outside a tiled restaurant front" loading="lazy">
+            <figcaption>Dog in Car · Hamburg</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/img/gallery/04.jpg" alt="Pier with a Ferris wheel and colourful pillars, light leak at the film edge" loading="lazy">
+            <figcaption>Pier · Scheveningen, NL</figcaption>
+          </figure>
+          <figure class="shot shot--wide">
+            <img src="assets/img/gallery/05.jpg" alt="Black-and-white: S-Bahn train entering a dark underground station" loading="lazy">
+            <figcaption>S-Bahn · Hamburg</figcaption>
+          </figure>
+          <figure class="shot shot--big">
+            <img src="assets/img/gallery/06.jpg" alt="Black-and-white: upside-down car installation in front of a stone wall" loading="lazy">
+            <figcaption>Kunstpalast · Düsseldorf</figcaption>
+          </figure>
+          <figure class="shot shot--wide">
+            <img src="assets/img/gallery/07.jpg" alt="Black-and-white: crowds between rides and a Ferris wheel at the fair" loading="lazy">
+            <figcaption>Rheinkirmes · Düsseldorf</figcaption>
+          </figure>
+          <figure class="shot shot--wide">
+            <img src="assets/img/gallery/08.jpg" alt="Black-and-white: people walking through a long underground shopping passage" loading="lazy">
+            <figcaption>HUGO · Cologne</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/img/gallery/09.jpg" alt="Black-and-white: old brick warehouse with graffiti and an outside staircase" loading="lazy">
+            <figcaption>Port · Basel</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/img/gallery/10.jpg" alt="Black-and-white: freight wagons along railway tracks leading to a harbour crane" loading="lazy">
+            <figcaption>Port · Basel</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section--contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">05</span>
+          <h2 class="section__title" id="contact-title">Con<em>tact</em></h2>
+        </header>
+
+        <div class="contact reveal">
+          <p class="contact__lead">
+            Open to R&amp;D projects, master's thesis opportunities and interesting test
+            challenges. Or just drop me a line to talk about film.
+          </p>
+          <a class="contact__mail" href="mailto:jo.patrick.scheifele@gmail.com">jo.patrick.scheifele<wbr>@gmail.com</a>
+          <!-- GitHub can be added here later -->
+          <ul class="contact__links">
+            <li><a href="https://www.linkedin.com/in/jo-scheifele-9015092b1/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/jo_vxxt/" target="_blank" rel="noopener">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>© <span id="year">2026</span> Jo Patrick Scheifele · Photos may not be used without permission.</span>
+      <span class="site-footer__mono">Built with HTML · CSS · JS — no frameworks</span>
+      <a href="#hero">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+    <button class="lightbox__btn lightbox__close" type="button" aria-label="Close">✕</button>
+    <button class="lightbox__btn lightbox__prev" type="button" aria-label="Previous image">←</button>
+    <figure class="lightbox__figure">
+      <div class="lightbox__stage"></div>
+      <figcaption class="lightbox__caption"></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__next" type="button" aria-label="Next image">→</button>
+  </div>
+</body>
+</html>

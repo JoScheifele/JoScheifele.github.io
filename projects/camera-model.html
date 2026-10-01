@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camera Model in Simscape · Jo Patrick Scheifele</title>
+  <meta name="description" content="A 1984 Canon T70 rebuilt in MATLAB Simscape Multibody: focusing helicoid, iris diaphragm, focal-plane shutter and film transport, verified against hand calculations and published data.">
+  <meta name="theme-color" content="#f5f5f3">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preload" href="../assets/fonts/instrument-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/fonts.css">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="nav__brand" href="../index.html" aria-label="Back to the home page">
+        <span class="nav__brand-mark" aria-hidden="true">⌖</span>
+        <span class="nav__brand-text">J.&nbsp;P.&nbsp;Scheifele</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu">
+        <li><a class="nav__link" href="../index.html#about"><span class="nav__idx">01</span>About</a></li>
+        <li><a class="nav__link" href="../index.html#experience"><span class="nav__idx">02</span>Experience</a></li>
+        <li><a class="nav__link is-active" href="../index.html#projects" aria-current="page"><span class="nav__idx">03</span>Projects</a></li>
+        <li><a class="nav__link" href="../index.html#gallery"><span class="nav__idx">04</span>Photography</a></li>
+        <li><a class="nav__link" href="../index.html#contact"><span class="nav__idx">05</span>Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ INTRO ============ -->
+    <section class="page-hero">
+      <div class="container">
+        <a class="page-hero__back" href="../index.html#projects">← All projects</a>
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>PRJ-002 · Course project · Multibody Simulation</p>
+        <h1 class="page-hero__title">Simulating an <em>Analog Camera</em></h1>
+        <p class="page-hero__sub">
+          A Canon T70 from 1984, rebuilt in MATLAB Simscape Multibody &ndash; four mechanisms,
+          seven degrees of freedom, and almost every number checked against something that
+          does not come from the model.
+        </p>
+
+        <dl class="facts">
+          <div><dt>Course</dt><dd>Simulation of Mechanical Systems</dd></div>
+          <div><dt>University</dt><dd>Hochschule Düsseldorf</dd></div>
+          <div><dt>Semester</dt><dd>Summer 2026</dd></div>
+          <div><dt>Tools</dt><dd>MATLAB · Simscape Multibody</dd></div>
+        </dl>
+
+        <figure class="article-figure article-figure--lead">
+          <img src="../assets/img/projects/camera-model/model-overview.png" width="1193" height="745"
+               alt="Simscape render of the complete model: film transport with take-up spool and sprocket, shutter curtains, film strip, iris diaphragm and focusing ring around the film gate.">
+          <figcaption>The complete model in the Mechanics Explorer.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <article class="article">
+      <!-- 01 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="why">
+        <p class="article__idx">01</p>
+        <h2 class="article__title" id="why">Why a <em>camera?</em></h2>
+        <p>
+          For the course <em>Simulation of Mechanical Systems</em>, every student had to model a
+          mechanical system in Simscape Multibody and verify it against analytical calculations.
+          I picked the camera that sits on my desk: a Canon T70 with a New FD 50&nbsp;mm f/1.8 lens.
+        </p>
+        <p>
+          There were two reasons. The first is density. A body of 151 × 89 × 48&nbsp;mm holds
+          four assemblies, and each one is a different kind of kinematic problem: prismatic
+          joints, a screw pair, a planar linkage repeated five times and a gear train.
+        </p>
+        <p>
+          The second is verifiability. Canon publishes the flash synchronisation time, the
+          aperture range and the closest focusing distance, and 35&nbsp;mm film is an
+          international standard. Whatever I could not look up, I measured on the camera, and
+          whatever I could neither look up nor measure was declared as an assumption. Every
+          value in the parameter script carries a tag that says which of these it is.
+        </p>
+        <p class="callout">Almost every number that matters can be checked against something that does not come from the model.</p>
+      </section>
+
+      <!-- 02 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="picture">
+        <p class="article__idx">02</p>
+        <h2 class="article__title" id="picture">How a picture <em>is taken</em></h2>
+        <p>A photograph needs four things, and each of them is one assembly in the model.</p>
+
+        <h3 class="article__sub"><span>1</span> Sharpness &ndash; focusing helicoid</h3>
+        <p>
+          Turning the distance ring by 182° pushes the lens group out by 4.55&nbsp;mm through a
+          lead screw. That is exactly the extension the lens equation asks for when a 50&nbsp;mm
+          lens focuses on its close limit of 0.60&nbsp;m.
+        </p>
+        <figure class="article-figure">
+          <video src="../assets/video/camera-model/focus.mp4" poster="../assets/video/camera-model/focus.jpg"
+                 width="1080" height="704" muted loop playsinline autoplay preload="metadata" data-autoplay
+                 aria-label="Animation: the focusing ring turns and the lens group moves along the optical axis."></video>
+          <figcaption>Focusing: ring rotation becomes axial travel of the lens group.</figcaption>
+        </figure>
+
+        <h3 class="article__sub"><span>2</span> Brightness &ndash; iris diaphragm</h3>
+        <p>
+          Five blades sit on their own pivots and are driven by pins in a setting ring. I did not
+          pick the blade shape by eye. I solved for it, so that the opening is exactly f/1.8 at one
+          end of the ring travel and f/22 at the other. The full standard series of stops in
+          between then falls out of the kinematics.
+        </p>
+        <figure class="article-figure">
+          <video src="../assets/video/camera-model/aperture.mp4" poster="../assets/video/camera-model/aperture.jpg"
+                 width="1080" height="704" muted loop playsinline autoplay preload="metadata" data-autoplay
+                 aria-label="Animation: five diaphragm blades close from a wide opening to a small pentagon."></video>
+          <figcaption>The iris closes from f/1.8 to f/22.</figcaption>
+        </figure>
+
+        <h3 class="article__sub"><span>3</span> Time &ndash; focal-plane shutter</h3>
+        <p>
+          Two curtains cross the 24&nbsp;mm film gate, one after the other. At 1/30&nbsp;s the
+          first curtain has long cleared the gate before the second one starts, so the whole frame
+          is open for a moment. At 1/500&nbsp;s the second curtain follows almost immediately, and
+          only a narrow slit travels across the film.
+        </p>
+        <div class="video-pair">
+          <figure class="article-figure">
+            <video src="../assets/video/camera-model/shutter-1-30.mp4" poster="../assets/video/camera-model/shutter-1-30.jpg"
+                   width="1080" height="704" muted loop playsinline autoplay preload="metadata" data-autoplay
+                   aria-label="Animation: shutter at 1/30 s, the gate opens completely before the second curtain closes it."></video>
+            <figcaption>1/30&nbsp;s &ndash; the gate opens completely</figcaption>
+          </figure>
+          <figure class="article-figure">
+            <video src="../assets/video/camera-model/shutter-1-500.mp4" poster="../assets/video/camera-model/shutter-1-500.jpg"
+                   width="1080" height="704" muted loop playsinline autoplay preload="metadata" data-autoplay
+                   aria-label="Animation: shutter at 1/500 s, a narrow slit between the curtains travels across the gate."></video>
+            <figcaption>1/500&nbsp;s &ndash; a travelling slit</figcaption>
+          </figure>
+        </div>
+        <p class="callout">Exposure time is not curtain speed. It is the gap between the two curtains.</p>
+
+        <h3 class="article__sub"><span>4</span> The next frame &ndash; film transport</h3>
+        <p>
+          A motor drives the sprocket wheel, the sprocket pulls the film, and a second gear path
+          winds it onto the take-up spool. The geometry comes from the film standard: eight
+          perforations of 4.750&nbsp;mm make exactly 38.000&nbsp;mm of film per frame, and one
+          sprocket revolution per frame fixes the sprocket radius. If the model does not return
+          38.000&nbsp;mm, a unit or a constraint is wrong.
+        </p>
+        <figure class="article-figure">
+          <video src="../assets/video/camera-model/film-transport.mp4" poster="../assets/video/camera-model/film-transport.jpg"
+                 width="1080" height="704" muted loop playsinline autoplay preload="metadata" data-autoplay
+                 aria-label="Animation: motor, sprocket wheel and take-up spool advance the film strip."></video>
+          <figcaption>Film transport: motor, sprocket wheel, film and take-up spool.</figcaption>
+        </figure>
+      </section>
+
+      <!-- 03 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="dof">
+        <p class="article__idx">03</p>
+        <h2 class="article__title" id="dof">Counting <em>degrees of freedom</em></h2>
+        <p>
+          Before trusting a simulation, I count by hand what it should be able to do. The
+          Grübler formula does that, and in this model it gets it right once and wrong once.
+        </p>
+        <p>
+          The shutter is a simple tree: three bodies, each on its own prismatic joint, so three
+          degrees of freedom. The focusing helicoid is a closed loop of two bodies and three joints,
+          and the formula returns <strong>−3</strong> for a mechanism that obviously moves. The
+          reason is that all three joint axes coincide with the optical axis. Grübler assumes the
+          constraints are independent, and here they are not.
+        </p>
+        <figure class="article-figure">
+          <img src="../assets/img/projects/camera-model/dof-diagram.png" width="1889" height="826" loading="lazy"
+               alt="Joint diagrams. Shutter as a tree: housing with three prismatic joints to curtain 1, curtain 2 and release button, F = 3, correct. Focusing helicoid as a closed loop of distance ring and lens group with revolute, prismatic and lead-screw joints, F = −3, impossible.">
+          <figcaption>Same formula, once right and once wrong.</figcaption>
+        </figure>
+        <p>
+          Simscape solves this by detecting and dropping the redundant constraint equations: 19 of
+          29 in the complete model. After that, my hand count and the Statistics Viewer agree on
+          <strong>7 degrees of freedom</strong>: three in the shutter, one each for focus and
+          aperture, and two in the film transport. One of those two is the motor. The other is the
+          slip of a friction clutch, and that one is there on purpose (more on it below).
+        </p>
+      </section>
+
+      <!-- 04 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="force">
+        <p class="article__idx">04</p>
+        <h2 class="article__title" id="force">Where the shutter <em>force comes from</em></h2>
+        <p>
+          No data sheet tells you how hard the shutter springs pull. My first version simply
+          assumed 400&nbsp;N because it gave a fast curtain. It was not just wrong by a factor. It
+          slammed the curtain into its end stop at 190&nbsp;m/s, which the solver could no longer
+          resolve, so the mistake showed up as a numerical artefact rather than as an obviously
+          silly number.
+        </p>
+        <p>
+          The fix was to use the one dynamic figure Canon does publish: the flash synchronisation
+          time of <strong>1/90&nbsp;s</strong>. By definition, that is how long a curtain takes to
+          cross the 24&nbsp;mm gate. Solving the equation of motion of a damped curtain backwards
+          for that travel time gives the drive force.
+        </p>
+        <p class="formula">m · dv/dt = F − c · v</p>
+
+        <div class="stat-row">
+          <div class="stat"><span class="stat__value">0.2795&nbsp;N</span><span class="stat__label">total drive force: 0.2744&nbsp;N spring + 0.0051&nbsp;N curtain weight</span></div>
+          <div class="stat"><span class="stat__value">11.11&nbsp;ms</span><span class="stat__label">curtain travel time, hand calculation vs. 11.10&nbsp;ms simulated</span></div>
+          <div class="stat"><span class="stat__value">1/88&nbsp;s</span><span class="stat__label">sync time with the camera held upside down</span></div>
+        </div>
+
+        <p>
+          The first full run disagreed with my hand calculation by 1.8&nbsp;% in the initial
+          acceleration: 549.0 against 539.1&nbsp;m/s². The difference, 9.9&nbsp;m/s², is gravity.
+          The shutter runs vertically, so the curtain's weight helps drive it. The simulation was
+          right all along. My hand calculation was incomplete.
+        </p>
+        <p>
+          That raised a fun question: what if you hold the camera upside down? Gravity then brakes
+          the curtains instead, and the sync time moves from 1/90&nbsp;s to 1/88&nbsp;s. The
+          exposure time does not change, because it is set by the delay between the curtains. On
+          the real camera you could not measure this cleanly: turning it over also changes the
+          friction in the curtain guides. The model has no friction there, and that is exactly why
+          it can separate the effect.
+        </p>
+        <p>
+          One honest caveat: the model then returns 1/90&nbsp;s as the boundary between slit and
+          full-frame exposure. Since the force was derived from that value, it is a consistency
+          check, not an independent validation.
+        </p>
+      </section>
+
+      <!-- 05 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="check">
+        <p class="article__idx">05</p>
+        <h2 class="article__title" id="check">Checking the <em>force model</em></h2>
+        <p>
+          To make sure no force was overlooked, I evaluated the equation of motion itself as a
+          residual at every time step:
+        </p>
+        <p class="formula">F<sub>drive</sub> + F<sub>weight</sub> − c · v − m · a = 0</p>
+        <p>
+          The largest residual over the whole curtain travel is
+          <strong>5.55 · 10⁻¹⁷&nbsp;N, or 0.90 times the machine epsilon</strong>. That is not
+          small &ndash; within double precision, it is exactly zero.
+        </p>
+        <p>
+          The energy balance tells the same story. Of the 6.70&nbsp;mJ the spring puts in, 52.2&nbsp;%
+          arrive at the end stop as kinetic energy and 47.8&nbsp;% are dissipated in the damper.
+          Almost half the spring work is lost, which is why an undamped back-of-the-envelope
+          estimate of the travel time is 15&nbsp;% off.
+        </p>
+      </section>
+
+      <!-- 06 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="inertia">
+        <p class="article__idx">06</p>
+        <h2 class="article__title" id="inertia">Masses <em>and torques</em></h2>
+        <p>
+          In most of the model, motion is prescribed or guided by constraints, so mass does not
+          change the trajectory. It changes the torque the motor has to supply. The useful measure
+          for that is the inertia reduced to the motor shaft: everything the motor has to
+          accelerate, expressed as if it sat on the motor shaft.
+        </p>
+        <figure class="article-figure">
+          <img src="../assets/img/projects/camera-model/reduced-inertia.png" width="1068" height="568" loading="lazy"
+               alt="Bar chart of inertia reduced to the motor shaft, total 6.711e-07 kg m². Take-up spool 39.3 %, motor shaft 23.5 %, sprocket wheel 20.9 %, clutch disc 11.3 %, idler gear 3.6 %, film mass 1.3 %.">
+          <figcaption>The slowest wheel carries the most inertia.</figcaption>
+        </figure>
+        <p>
+          The surprise: the take-up spool turns at only a third of motor speed but contributes the
+          largest share, 39.3&nbsp;%, because its own inertia is five times that of the sprocket
+          wheel. Reduced inertias cannot be estimated; they have to be calculated. And even so,
+          friction in the clutch loads the drive about four times more than accelerating all of
+          that inertia does.
+        </p>
+      </section>
+
+      <!-- 07 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="clutch">
+        <p class="article__idx">07</p>
+        <h2 class="article__title" id="clutch">The friction <em>clutch</em></h2>
+        <p>
+          The film transport hides a contradiction. The sprocket delivers the same 38&nbsp;mm of
+          film every frame, but the take-up spool grows as film piles onto it: from 11.30 to
+          13.73&nbsp;mm radius over a 36-frame roll, 21.6&nbsp;% more. A rigid gear connection
+          cannot satisfy both at once.
+        </p>
+        <p>
+          So the spool is geared to always want slightly more film than the sprocket delivers,
+          and a friction clutch lets the difference slip. That slip is the seventh degree of
+          freedom: a kinematic contradiction needs somewhere to go.
+        </p>
+        <figure class="article-figure">
+          <img src="../assets/img/projects/camera-model/friction-clutch.png" width="1347" height="622" loading="lazy"
+               alt="Two plots over time. Left: winding radius of the take-up spool rises from 11.30 to about 11.52 mm, matching the hand calculation. Right: accumulated clutch slip rises to 1.4097 rad in simulation, matching the geometric calculation.">
+          <figcaption>Left: the spool grows, the sprocket does not. Right: the clutch sheds the difference.</figcaption>
+        </figure>
+        <p>
+          This is my favourite result. In the simulation, the slip comes out of forces, inertias
+          and a friction law. By hand, it follows from geometry alone. Two routes that share no
+          assumption give the same number to four digits: <strong>1.4097&nbsp;rad</strong> over
+          three frames.
+        </p>
+        <p class="callout">Canon solved it the same way in 1984 &ndash; US patent 4,626,092.</p>
+      </section>
+
+      <!-- 08 ------------------------------------------------------------ -->
+      <section class="article__section" aria-labelledby="limits">
+        <p class="article__idx">08</p>
+        <h2 class="article__title" id="limits">Limits <em>&amp; next steps</em></h2>
+        <p>
+          Apart from the clutch and the shutter damping, the model contains no friction and no
+          contact. The diaphragm blades, for example, do not touch each other; they are offset by
+          0.4&nbsp;mm along the optical axis so they can pass. And the four assemblies run as one
+          model but not yet as one machine.
+        </p>
+        <p>
+          The next step would be to close the release cycle. The second curtain hitting its stop
+          would start the transport motor. The release would stay blocked while the film advances,
+          like the double-exposure lock of the real camera. At the end, the curtains would be
+          tensioned again. Adding friction and blade contact would remove most of the remaining
+          limits, but both cost far more than they look.
+        </p>
+
+        <div class="project-cta">
+          <p>Curious about the model, the parameter set or the full report? I'm happy to walk you through it.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Get in touch</a>
+        </div>
+      </section>
+
+      <!-- References ---------------------------------------------------- -->
+      <section class="article__section article__refs" aria-labelledby="refs">
+        <h2 class="article__refs-title" id="refs">References</h2>
+        <ol>
+          <li>Canon Camera Museum. <em>Canon T70</em>: shutter type, speed range, flash synchronisation time, film advance.</li>
+          <li>Canon Classics. <em>Canon New FD 50&nbsp;mm f/1.8</em>: mass, optical construction, aperture range, closest focusing distance.</li>
+          <li>Konno, T. <em>Clutch mechanism for camera</em>. US Patent 4,626,092, Canon Inc., 1986.</li>
+          <li>Kerle, H., Corves, B., Hüsing, M. <em>Getriebetechnik</em>. 5th ed., Springer Vieweg, 2015.</li>
+          <li>Batos, A. <em>Simulation of Mechanical Systems</em>. Lecture notes, Hochschule Düsseldorf.</li>
+        </ol>
+      </section>
+    </article>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>© <span id="year">2026</span> Jo Patrick Scheifele · Photos may not be used without permission.</span>
+      <span class="site-footer__mono">Built with HTML · CSS · JS — no frameworks</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+</body>
+</html>

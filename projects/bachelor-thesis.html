@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-based Video Analysis · Jo Patrick Scheifele</title>
+  <meta name="description" content="Bachelor thesis of Jo Patrick Scheifele: a fine-tuned YOLOv11 model that automates the evaluation of test videos for driver assistance systems and cuts evaluation time by up to 80 %.">
+  <meta name="theme-color" content="#f5f5f3">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preload" href="../assets/fonts/instrument-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/fonts.css">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="nav__brand" href="../index.html" aria-label="Back to the home page">
+        <span class="nav__brand-mark" aria-hidden="true">⌖</span>
+        <span class="nav__brand-text">J.&nbsp;P.&nbsp;Scheifele</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav__menu" id="nav-menu">
+        <li><a class="nav__link" href="../index.html#about"><span class="nav__idx">01</span>About</a></li>
+        <li><a class="nav__link" href="../index.html#experience"><span class="nav__idx">02</span>Experience</a></li>
+        <li><a class="nav__link is-active" href="../index.html#projects" aria-current="page"><span class="nav__idx">03</span>Projects</a></li>
+        <li><a class="nav__link" href="../index.html#gallery"><span class="nav__idx">04</span>Photography</a></li>
+        <li><a class="nav__link" href="../index.html#contact"><span class="nav__idx">05</span>Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ INTRO ============ -->
+    <section class="page-hero">
+      <div class="container">
+        <a class="page-hero__back" href="../index.html#projects">← All projects</a>
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>PRJ-001 · Bachelor thesis · Object Detection</p>
+        <h1 class="page-hero__title">AI-based <em>Video Analysis</em></h1>
+        <p class="page-hero__sub">Automating the evaluation of driver assistance tests with a fine-tuned object detection model.</p>
+
+        <dl class="facts">
+          <div><dt>Degree</dt><dd>B.Eng. Automotive Engineering</dd></div>
+          <div><dt>University</dt><dd>TH Köln</dd></div>
+          <div><dt>Written at</dt><dd>AVL-Schrick GmbH</dd></div>
+          <div><dt>Stack</dt><dd>Python · YOLOv11 · Ultralytics</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section class="section section--tight" id="overview" aria-labelledby="overview-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">01</span>
+          <h2 class="section__title" id="overview-title">Over<em>view</em></h2>
+        </header>
+
+        <div class="project-overview">
+          <div class="project-overview__text reveal">
+            <p class="lead">
+              Can a fine-tuned object detection model take over the tedious part of evaluating
+              test videos? My bachelor thesis answered that question for Moving-Off Information
+              Systems in commercial vehicles.
+            </p>
+            <p>
+              These systems warn the driver when a pedestrian or cyclist is directly in front of
+              the vehicle as it pulls away. To validate them, test drives are recorded on video
+              while the vehicle signals are logged &ndash; and afterwards someone has to watch the
+              footage and check whether the system reacted as intended. Most of that work was
+              still done by hand.
+            </p>
+            <p>
+              General-purpose detection networks are trained on everyday images and struggle
+              with the specific visual conditions of structured automotive test scenarios.
+              I therefore built a project-specific dataset from real measurement videos,
+              annotated it with a mix of manual and semi-automated labelling, and fine-tuned a
+              YOLOv11 model on it. Several training configurations were compared against standard
+              pre-trained models using precision, recall and mean Average Precision (mAP).
+            </p>
+            <p>
+              The fine-tuned model detected and localised objects more accurately, produced far
+              fewer false classifications and stayed stable across different test conditions.
+              Integrated into an automated evaluation workflow, it turned hours of video review
+              into a quick check of generated reports.
+            </p>
+          </div>
+
+          <aside class="stats reveal" aria-label="Key results">
+            <div class="stat">
+              <span class="stat__value">−80&nbsp;%</span>
+              <span class="stat__label">active evaluation time in structured scenario testing</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">−70&nbsp;%</span>
+              <span class="stat__label">active evaluation time in operational field testing</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">↑&nbsp;mAP</span>
+              <span class="stat__label">higher detection accuracy than the pre-trained base model</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APPROACH ============ -->
+    <section class="section section--tight" id="approach" aria-labelledby="approach-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">02</span>
+          <h2 class="section__title" id="approach-title">Ap<em>proach</em></h2>
+        </header>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__idx">01</span>
+            <h3 class="step__title">Record test data</h3>
+            <p>Video and vehicle system signals are recorded during driver assistance system tests.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__idx">02</span>
+            <h3 class="step__title">Detect relevant objects</h3>
+            <p>The fine-tuned model identifies pedestrians and cyclists in front of the vehicle.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__idx">03</span>
+            <h3 class="step__title">Align video &amp; signals</h3>
+            <p>Detections are time-synchronised with the vehicle's warning signal.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__idx">04</span>
+            <h3 class="step__title">Evaluate behaviour</h3>
+            <p>The tool checks whether the system reacted correctly and generates standardised test reports.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ POSTER ============ -->
+    <section class="section section--tight" id="poster" aria-labelledby="poster-title">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__idx">03</span>
+          <h2 class="section__title" id="poster-title">Pos<em>ter</em></h2>
+          <p class="section__sub">The thesis itself is confidential (NDA). This A1 poster is its public summary.</p>
+        </header>
+
+        <figure class="poster reveal">
+          <a class="poster__link" href="../assets/img/projects/bachelor-thesis-poster.jpg" target="_blank" rel="noopener">
+            <img src="../assets/img/projects/bachelor-thesis-poster.jpg" width="2400" height="3419" loading="lazy"
+                 alt="A1 poster 'Automating Video Evaluation Using AI Object Detection': introduction and test setup, a four-step evaluation pipeline, a chart comparing base and fine-tuned model accuracy, the reduction in evaluation time, and limitations.">
+          </a>
+          <figcaption>A1 poster · click to open in full resolution ↗</figcaption>
+        </figure>
+
+        <div class="project-cta reveal">
+          <p>Want to know more about the project? I'm happy to talk about it &ndash; within the limits of the NDA.</p>
+          <a class="btn btn--primary" href="../index.html#contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span>© <span id="year">2026</span> Jo Patrick Scheifele · Photos may not be used without permission.</span>
+      <span class="site-footer__mono">Built with HTML · CSS · JS — no frameworks</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+</body>
+</html>

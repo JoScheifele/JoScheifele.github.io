@@ -1,0 +1,15 @@
+# Test-Ausgaben (werden bei jedem Testlauf neu erzeugt)
+tests/screenshots/
+
+# Lokale Tool-Konfiguration
+.claude/
+
+# Betriebssystem / Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+*.swp
+
+# Original-Fotos in voller Auflösung (nur lokal, nicht veröffentlichen)
+_originals/
