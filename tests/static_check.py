@@ -49,7 +49,7 @@ def main() -> int:
     html = INDEX.read_text(encoding="utf-8")
     p = Collector()
     p.feed(html)
-    errors, passed = [], []
+    errors, passed, warnings = [], [], []
 
     def check(ok, msg):
         (passed if ok else errors).append(msg)
@@ -128,7 +128,8 @@ def main() -> int:
     # Normale Links (<a href="https://...">) sind erlaubt – sie übertragen erst beim Klick Daten.
     import re as _re
     external = []
-    for page in [INDEX, *sorted((ROOT / "projects").glob("*.html"))]:
+    all_pages = [*sorted(ROOT.glob("*.html")), *sorted((ROOT / "projects").glob("*.html"))]
+    for page in all_pages:
         src = page.read_text(encoding="utf-8")
         for m in _re.finditer(r"<(link|script|img|video|audio|source|iframe|embed|object)\b[^>]*?"
                               r"\b(?:src|href|poster|data)=\"(https?:)?//[^\"]+\"", src, _re.I):
@@ -139,11 +140,29 @@ def main() -> int:
                      for _ in _re.findall(r"(?:@import|url\()\s*['\"]?https?:", css.read_text(encoding="utf-8"))]
     check(not external, f"keine externen Ressourcen auf allen Seiten {external or ''}")
 
+    # Rechtliches: jede Seite verlinkt Impressum + Datenschutz im Footer
+    for name in ("imprint.html", "privacy.html"):
+        check((ROOT / name).exists(), f"{name} vorhanden")
+    no_legal = []
+    for page in all_pages:
+        footer = page.read_text(encoding="utf-8").split('<footer class="site-footer">')[-1]
+        if not (_re.search(r'href="(\.\./)?imprint\.html"', footer) and _re.search(r'href="(\.\./)?privacy\.html"', footer)):
+            no_legal.append(str(page.relative_to(ROOT)))
+    check(not no_legal, f"alle Seiten verlinken Impressum + Datenschutz im Footer {no_legal or ''}")
+
+    # Offene Platzhalter (<mark class="todo">) – nur Warnung, kein Fehler
+    for page in all_pages:
+        n = page.read_text(encoding="utf-8").count('class="todo"')
+        if n:
+            warnings.append(f"{page.relative_to(ROOT)}: {n} offene Platzhalter (vor dem Online-Stellen ausfüllen)")
+
     for m in passed:
         print(f"  PASS  {m}")
     for m in errors:
         print(f"  FAIL  {m}")
-    print(f"\n{len(passed)} bestanden, {len(errors)} fehlgeschlagen")
+    for m in warnings:
+        print(f"  WARN  {m}")
+    print(f"\n{len(passed)} bestanden, {len(errors)} fehlgeschlagen, {len(warnings)} Warnungen")
     return 1 if errors else 0
 
 

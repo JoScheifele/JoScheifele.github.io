@@ -333,6 +333,25 @@ for (const [label, w, h, mobile] of [["Desktop", 1280, 800, false], ["Mobile", 3
   await fullScreenshot(`car-${label.toLowerCase()}.png`);
 }
 
+/* ================= IMPRESSUM & DATENSCHUTZ ================= */
+for (const page of ["/imprint.html", "/privacy.html"]) {
+  for (const [label, w, h, mobile] of [["Desktop", 1280, 800, false], ["Mobile", 375, 812, true]]) {
+    pageErrors.length = 0;
+    await load(w, h, mobile, page);
+    await test(`${page} ${label}: keine JS-Fehler, kein horizontales Scrollen`, async () => {
+      const [sw, cw] = await evaluate("[document.documentElement.scrollWidth, document.documentElement.clientWidth]");
+      assert(pageErrors.length === 0, pageErrors.join(" | "));
+      assert(sw <= cw, `scrollWidth ${sw} > clientWidth ${cw}`);
+    });
+  }
+  await fullScreenshot(`legal-${page.slice(1, -5)}-mobile.png`);
+}
+await test("Footer-Links führen zu Impressum und Datenschutz", async () => {
+  await load(1280, 800, false, "/projects/camera-model.html");
+  const r = await evaluate(`[...document.querySelectorAll('.site-footer__legal a')].map(a => a.href)`);
+  assert(r.length === 2 && r[0].endsWith("/imprint.html") && r[1].endsWith("/privacy.html"), r.join(", "));
+});
+
 /* ================= DATENSCHUTZ (alle Seiten) ================= */
 await test("Alle Seiten: keine Requests an externe Server (z. B. Google Fonts)", async () =>
   assert(externalRequests.size === 0, [...externalRequests].join(", ")));

@@ -122,6 +122,15 @@ oder WebP exportieren, sonst lädt die Seite langsam.
 - [ ] GitHub-Link wieder ergänzen, sobald dort Projekte liegen
 - [x] Galerie: 10 echte Fotos (Motiv · Ort); Film/Jahr können ergänzt werden
 
+### Vor dem Online-Stellen (Rechtliches)
+
+- [ ] **Anschrift** in `imprint.html` und `privacy.html` eintragen (gelb markierte `<mark class="todo">`-Platzhalter;
+      `python tests/static_check.py` meldet sie als `WARN`). Zustellfähige Adresse nötig – eigene oder Impressum-Adressdienst, kein Postfach.
+- [ ] **Hoster festlegen.** `privacy.html` Abschnitt 03 ist für GitHub Pages geschrieben; für Cloudflare Pages
+      die im HTML-Kommentar vorbereitete „Variante B" einsetzen.
+- [ ] DPF-Zertifizierung des Hosters kurz prüfen: <https://www.dataprivacyframework.gov/list>
+- [ ] Betreuer (AVL) hat Poster freigegeben; Projektseite zur Durchsicht geschickt
+
 ## 6. Barrierefreiheit & Qualität
 
 - Semantisches HTML (`header/nav/main/section/article/footer`), genau eine `h1`
@@ -200,6 +209,7 @@ Falls Chrome/Edge nicht gefunden wird: Umgebungsvariable `CHROME_PATH` setzen.
 | 2026-09-26 | Projekt 2: Artikel Kameramodell (Simscape), 5 Videos via `ffmpeg -vf "crop=1620:1056:150:0,scale=1080:-2" -crf 26 -an -movflags +faststart`, Artikel-CSS, Video-Autoplay-Modul, Browser-Tests |
 | 2026-09-26 | Farbschema hell (Weiß/Grau, schwarzer Text, grüner Akzent), echte Social-Links, Portrait, 10 Galerie-Fotos, Projektseite Bachelorarbeit inkl. Browser-Tests |
 | 2026-10-01 | Schriften lokal gehostet statt Google Fonts (DSGVO), Tests auf externe Requests ergänzt, Git-Historie vor der Veröffentlichung zu einem Commit zusammengefasst |
+| 2026-10-01 | Bachelorarbeit-Seite entschärft (YOLO statt YOLOv11, Labeling-Methoden allgemein); Impressum (`imprint.html`) und Datenschutzerklärung (`privacy.html`) mit Adress-Platzhaltern, Footer-Links auf allen Seiten, Tests inkl. Platzhalter-Warnung |
 
 ## 11. Mögliche nächste Schritte
 
