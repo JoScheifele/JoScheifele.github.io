@@ -124,11 +124,14 @@ oder WebP exportieren, sonst lädt die Seite langsam.
 
 ### Vor dem Online-Stellen (Rechtliches)
 
-- [ ] **Anschrift** in `imprint.html` und `privacy.html` eintragen (gelb markierte `<mark class="todo">`-Platzhalter;
-      `python tests/static_check.py` meldet sie als `WARN`). Zustellfähige Adresse nötig – eigene oder Impressum-Adressdienst, kein Postfach.
-- [ ] **Hoster festlegen.** `privacy.html` Abschnitt 03 ist für GitHub Pages geschrieben; für Cloudflare Pages
-      die im HTML-Kommentar vorbereitete „Variante B" einsetzen.
-- [ ] DPF-Zertifizierung des Hosters kurz prüfen: <https://www.dataprivacyframework.gov/list>
+- [x] **Anschrift:** bewusst nur „Jo Patrick Scheifele, Düsseldorf" + E-Mail, ohne Straße (private, nicht-kommerzielle Seite).
+      Restrisiko bekannt: § 18 Abs. 1 MStV verlangt Name + Anschrift, sobald eine Seite nicht ausschließlich
+      persönlichen/familiären Zwecken dient – bei einem Bewerbungs-Portfolio ist das auslegungsfähig.
+      Falls nötig: vollständige Adresse oder Impressum-Adressdienst nachtragen.
+- [x] **Hoster:** GitHub Pages (`privacy.html` Abschnitt 03, Variante A). Für Cloudflare Pages die im
+      HTML-Kommentar vorbereitete „Variante B" einsetzen.
+- [x] DPF-Zertifizierung des Hosters geprüft (2026-10-22): GitHub, San Francisco – EU-U.S. DPF *Active*
+      (<https://www.dataprivacyframework.gov/list>). Gelegentlich erneut prüfen.
 - [ ] Betreuer (AVL) hat Poster freigegeben; Projektseite zur Durchsicht geschickt
 
 ## 6. Barrierefreiheit & Qualität
@@ -210,6 +213,7 @@ Falls Chrome/Edge nicht gefunden wird: Umgebungsvariable `CHROME_PATH` setzen.
 | 2026-09-26 | Farbschema hell (Weiß/Grau, schwarzer Text, grüner Akzent), echte Social-Links, Portrait, 10 Galerie-Fotos, Projektseite Bachelorarbeit inkl. Browser-Tests |
 | 2026-10-01 | Schriften lokal gehostet statt Google Fonts (DSGVO), Tests auf externe Requests ergänzt, Git-Historie vor der Veröffentlichung zu einem Commit zusammengefasst |
 | 2026-10-01 | Bachelorarbeit-Seite entschärft (YOLO statt YOLOv11, Labeling-Methoden allgemein); Impressum (`imprint.html`) und Datenschutzerklärung (`privacy.html`) mit Adress-Platzhaltern, Footer-Links auf allen Seiten, Tests inkl. Platzhalter-Warnung |
+| 2026-10-22 | Umzug auf neuen Rechner. Impressum/Datenschutz: nur Name + Düsseldorf + E-Mail (keine Straße), Hoster = GitHub Pages, DPF-Status von GitHub geprüft |
 
 ## 11. Mögliche nächste Schritte
 
