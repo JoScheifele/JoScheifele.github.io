@@ -1,9 +1,13 @@
-// Erzeugt die Open-Graph-Vorschaubilder (1200 × 630) für LinkedIn & Co.
+// Erzeugt die Open-Graph-Vorschaubilder für LinkedIn & Co.
 // Aufruf im Projektordner:  node tools/og-cards.mjs
-// Braucht Chrome/Edge (headless) und ffmpeg (PNG → JPG). Ausgabe: assets/img/og/*.jpg
+// Braucht Chrome/Edge (headless). Ausgabe: assets/img/og/*.png
+//
+// Layout 1200 × 630 (Seitenverhältnis 1,91 : 1), gerendert mit doppelter Pixeldichte
+// → 2400 × 1260 px PNG. LinkedIn zeigt die Karte im Feed nur ~550 px breit und komprimiert
+// neu: deshalb wenig Text, große Schrift, kein feines Raster, verlustfrei als PNG.
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -14,33 +18,32 @@ const OUT = join(ROOT, "assets/img/og");
 const CARDS = [
   {
     file: "home",
-    eyebrow: "Test Engineer · Mechanical Engineering · Analog Photography",
+    label: "Portfolio",
     title: "Jo Patrick<br><em>Scheifele</em>",
-    sub: "I test, document, and evaluate. In between, I expose 36 frames on film.",
+    sub: "Test engineer &amp; analog photographer",
     image: "assets/img/portrait.jpg",
-    portrait: true,
     position: "50% 20%",
   },
   {
     file: "bachelor-thesis",
-    eyebrow: "PRJ-001 · Bachelor thesis · Object Detection",
+    label: "Bachelor thesis",
     title: "AI-based<br><em>Video Analysis</em>",
-    sub: "Automating the evaluation of driver assistance tests with a fine-tuned YOLO model.",
+    sub: "YOLO for driver assistance tests",
     image: "assets/img/projects/bachelor-thesis-card.jpg",
     position: "0% 0%",
   },
   {
     file: "camera-model",
-    eyebrow: "PRJ-002 · Course project · Multibody Simulation",
+    label: "Simulation project",
     title: "Simulating an<br><em>Analog Camera</em>",
-    sub: "A 1984 Canon T70 rebuilt in MATLAB Simscape Multibody.",
+    sub: "A Canon T70 in Simscape",
     image: "assets/img/projects/camera-model/card.jpg",
   },
   {
     file: "bmw-e46",
-    eyebrow: "PRJ-003 · Personal · Garage",
+    label: "Garage project",
     title: "BMW E46<br><em>330Ci</em>",
-    sub: "A 2002 convertible I have owned since 2018 – a piece of art on wheels.",
+    sub: "My convertible since 2018",
     image: "assets/img/projects/e46/card.jpg",
   },
 ];
@@ -67,39 +70,32 @@ const page = (c) => `<!DOCTYPE html>
   body {
     background-color: #f5f5f3;
     background-image:
-      linear-gradient(rgba(20,20,20,.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(20,20,20,.06) 1px, transparent 1px),
-      linear-gradient(rgba(20,20,20,.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(20,20,20,.035) 1px, transparent 1px);
-    background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+      linear-gradient(rgba(20,20,20,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,20,20,.05) 1px, transparent 1px);
+    background-size: 40px 40px;
     color: #111; font-family: "IBM Plex Sans", sans-serif;
-    display: grid; grid-template-columns: 1fr 400px; grid-template-rows: 100%; gap: 56px; padding: 60px 64px;
+    display: grid; grid-template-columns: 1fr 400px; grid-template-rows: 100%; gap: 56px; padding: 64px 64px 64px 72px;
   }
-  .text { display: flex; flex-direction: column; min-width: 0; }
-  .eyebrow { font: 500 15px/1.4 "IBM Plex Mono", monospace; letter-spacing: .08em;
-             text-transform: uppercase; color: #4a4a4a; display: flex; gap: 12px; align-items: baseline; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: #2e7d4f; flex: none; transform: translateY(-1px); }
-  h1 { font: 400 92px/.95 "Instrument Serif", serif; letter-spacing: -.01em; margin-top: 36px; white-space: nowrap; }
+  .text { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .label { font: 500 26px/1 "IBM Plex Mono", monospace; letter-spacing: .06em; text-transform: uppercase;
+           color: #2e7d4f; display: flex; gap: 14px; align-items: center; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: #2e7d4f; flex: none; }
+  h1 { font: 400 108px/.95 "Instrument Serif", serif; letter-spacing: -.01em; margin-top: 40px; white-space: nowrap; }
   h1 em { font-style: italic; color: #2e7d4f; }
-  .sub { font-size: 24px; line-height: 1.45; color: #4a4a4a; margin-top: 28px; max-width: 32ch; }
-  .foot { margin-top: auto; font: 500 17px "IBM Plex Mono", monospace; color: #767676; letter-spacing: .04em;
-          border-top: 1px solid #dcdcd8; padding-top: 18px; display: flex; justify-content: space-between; }
-  .foot b { font-weight: 500; color: #2e7d4f; }
-  .frame { position: relative; align-self: center; height: 100%; background: #fff; padding: 12px;
-           border: 1px solid #dcdcd8; }
+  .sub { font-size: 34px; line-height: 1.25; color: #333; margin-top: 36px; }
+  .frame { position: relative; background: #fff; padding: 12px; border: 1px solid #dcdcd8; }
   .frame img { width: 100%; height: 100%; object-fit: cover; display: block;
                object-position: ${c.position ?? "50% 50%"}; }
   /* Passermarken wie ums Portrait auf der Seite */
-  .mark { position: absolute; width: 22px; height: 22px; border-color: #2e7d4f; border-style: solid; }
-  .tl { top: -12px; left: -12px; border-width: 2px 0 0 2px; }
-  .br { bottom: -12px; right: -12px; border-width: 0 2px 2px 0; }
+  .mark { position: absolute; width: 26px; height: 26px; border-color: #2e7d4f; border-style: solid; }
+  .tl { top: -14px; left: -14px; border-width: 3px 0 0 3px; }
+  .br { bottom: -14px; right: -14px; border-width: 0 3px 3px 0; }
 </style></head>
 <body>
   <div class="text">
-    <p class="eyebrow"><span class="dot"></span>${c.eyebrow}</p>
+    <p class="label"><span class="dot"></span>${c.label}</p>
     <h1>${c.title}</h1>
     <p class="sub">${c.sub}</p>
-    <p class="foot"><span>${c.portrait ? "Portfolio" : "Jo Patrick Scheifele"}</span><b>joscheifele.github.io</b></p>
   </div>
   <div class="frame"><img src="${url(c.image)}" alt=""><span class="mark tl"></span><span class="mark br"></span></div>
 </body></html>`;
@@ -109,16 +105,14 @@ const tmp = mkdtempSync(join(tmpdir(), "og-"));
 try {
   for (const c of CARDS) {
     const html = join(tmp, `${c.file}.html`);
-    const png = join(tmp, `${c.file}.png`);
+    const png = join(OUT, `${c.file}.png`);
     writeFileSync(html, page(c));
     execFileSync(exe, [
       "--headless=new", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files",
-      "--force-device-scale-factor=1", "--window-size=1200,630", "--virtual-time-budget=3000",
+      "--force-device-scale-factor=2", "--window-size=1200,630", "--virtual-time-budget=3000",
       `--user-data-dir=${join(tmp, "profile")}`, `--screenshot=${png}`, pathToFileURL(html).href,
     ], { stdio: "ignore" });
-    const jpg = join(OUT, `${c.file}.jpg`);
-    execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-i", png, "-q:v", "3", jpg]);
-    console.log("  ok ", jpg.slice(ROOT.length + 1));
+    console.log(`  ok  ${png.slice(ROOT.length + 1)}  (${Math.round(statSync(png).size / 1024)} KB)`);
   }
 } finally {
   rmSync(tmp, { recursive: true, force: true });
