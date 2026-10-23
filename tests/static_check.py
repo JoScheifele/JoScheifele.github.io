@@ -150,6 +150,25 @@ def main() -> int:
             no_legal.append(str(page.relative_to(ROOT)))
     check(not no_legal, f"alle Seiten verlinken Impressum + Datenschutz im Footer {no_legal or ''}")
 
+    # Linkvorschau (LinkedIn & Co.): Open-Graph-Tags vollständig, og:url passt zur Datei,
+    # og:image zeigt absolut auf die Live-Seite und die Datei existiert lokal
+    live = "https://joscheifele.github.io/"
+    og_bad = []
+    for page in all_pages:
+        src = page.read_text(encoding="utf-8")
+        og = dict(_re.findall(r'<meta property="og:([\w:]+)" content="([^"]*)"', src))
+        rel = page.relative_to(ROOT).as_posix()
+        missing = [k for k in ("type", "title", "description", "url", "image", "image:alt") if not og.get(k)]
+        if missing:
+            og_bad.append(f"{rel}: fehlt {missing}")
+            continue
+        if og["url"] != live + ("" if rel == "index.html" else rel):
+            og_bad.append(f"{rel}: og:url {og['url']}")
+        img = og["image"]
+        if not img.startswith(live) or not (ROOT / img[len(live):]).exists():
+            og_bad.append(f"{rel}: og:image {img}")
+    check(not og_bad, f"Open-Graph-Tags vollständig, Vorschaubilder vorhanden {og_bad or ''}")
+
     # Offene Platzhalter (<mark class="todo">) – nur Warnung, kein Fehler
     for page in all_pages:
         n = page.read_text(encoding="utf-8").count('class="todo"')

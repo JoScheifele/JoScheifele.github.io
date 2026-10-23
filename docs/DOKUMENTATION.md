@@ -22,9 +22,11 @@ Website/
 ├── js/main.js              Navigation, Scroll-Effekte, Lissajous-Animation, Lightbox
 ├── assets/
 │   ├── favicon.svg
-│   ├── img/                portrait.jpg, projects/ (Karten-Bild + Poster), gallery/ (01–10.jpg)
+│   ├── img/                portrait.jpg, projects/ (Karten-Bild + Poster), gallery/ (01–10.jpg),
+│   │                       og/ (Linkvorschau-Bilder 1200 × 630, generiert)
 │   └── video/camera-model/ Simulationsvideos (1080 px, H.264, ohne Ton) + Standbilder
 ├── docs/DOKUMENTATION.md   Diese Datei
+├── tools/og-cards.mjs      Erzeugt die Linkvorschau-Bilder (Headless-Chrome + ffmpeg)
 ├── tests/
 │   ├── static_check.py     Statische HTML-Prüfung (Python-Stdlib)
 │   ├── browser_test.mjs    Browser-Test via Headless-Chrome (Node ≥ 22)
@@ -233,12 +235,12 @@ Status: Repo → *Actions*.
 | 2026-10-01 | Bachelorarbeit-Seite entschärft (YOLO statt YOLOv11, Labeling-Methoden allgemein); Impressum (`imprint.html`) und Datenschutzerklärung (`privacy.html`) mit Adress-Platzhaltern, Footer-Links auf allen Seiten, Tests inkl. Platzhalter-Warnung |
 | 2026-10-22 | Umzug auf neuen Rechner. Impressum/Datenschutz: nur Name + Düsseldorf + E-Mail (keine Straße), Hoster = GitHub Pages, DPF-Status von GitHub geprüft |
 | 2026-10-23 | Veröffentlicht: GitHub-Account in `JoScheifele` umbenannt, Repo `JoScheifele.github.io` (öffentlich), Pages aktiv unter <https://joscheifele.github.io/>; vorher geprüft: keine Originale im Repo, Kennzeichen unkenntlich, keine GPS-Daten in Bildern |
+| 2026-10-23 | Linkvorschau für LinkedIn & Co.: Open-Graph-Tags auf allen Seiten, 4 Vorschaubilder (`assets/img/og/`, erzeugt mit `node tools/og-cards.mjs`), statischer Test auf vollständige OG-Tags |
 
 ## 11. Mögliche nächste Schritte
 
 - Echte Inhalte und Bilder einsetzen (siehe Checkliste Abschnitt 5)
 - Projekt-Detailseiten (`projects/projekt-1.html`) mit gleichem Stylesheet
-- Open-Graph-Meta-Tags + Vorschaubild für LinkedIn-Shares
 - Responsive Bilder (`srcset`) bzw. WebP für schnellere Galerie
 - Eigene Domain über Cloudflare
 - Optional: Sprachumschalter DE/EN
