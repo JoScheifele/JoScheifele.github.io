@@ -2,6 +2,8 @@
 
 Personal portfolio website: test engineering, mechanical/automotive engineering and analog photography.
 
+**Live:** <https://joscheifele.github.io/>
+
 Plain HTML, CSS and JavaScript – no frameworks, no build step. Deployable as-is on GitHub Pages or Cloudflare Pages.
 
 ## Sections
@@ -58,6 +60,6 @@ See [docs/DOKUMENTATION.md](docs/DOKUMENTATION.md) for details.
 
 ## Deployment
 
-**GitHub Pages:** push to `main` → *Settings → Pages* → Deploy from branch `main`, folder `/ (root)`.
+**GitHub Pages (active):** deployed from branch `main`, folder `/ (root)`. Every push to `main` goes live after about a minute.
 
 **Cloudflare Pages:** connect the repository, framework preset *None*, no build command, output directory `/`.

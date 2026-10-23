@@ -188,11 +188,29 @@ Falls Chrome/Edge nicht gefunden wird: Umgebungsvariable `CHROME_PATH` setzen.
 
 ## 9. Deployment
 
-### GitHub Pages
-1. Repository auf GitHub anlegen (z. B. `portfolio` oder `<username>.github.io`)
-2. `git remote add origin https://github.com/<username>/<repo>.git` und `git push -u origin main`
-3. Repo → *Settings → Pages* → Source: *Deploy from a branch*, Branch `main`, Ordner `/ (root)`
-4. Nach ~1 min erreichbar unter `https://<username>.github.io/<repo>/`
+**Live seit 2026-10-23:** <https://joscheifele.github.io/>
+
+| | |
+|---|---|
+| Repository | [JoScheifele/JoScheifele.github.io](https://github.com/JoScheifele/JoScheifele.github.io) (öffentlich) |
+| Hosting | GitHub Pages, *Deploy from a branch*: `main`, Ordner `/ (root)` |
+| Custom Domain | keine (Stand 2026-10-23) |
+
+**Änderungen veröffentlichen:** committen und auf `main` pushen (Kommandozeile oder GitHub Desktop).
+Die Aktion „pages build and deployment“ baut die Seite neu, nach ca. 1 min ist sie live.
+Status: Repo → *Actions*.
+
+> Wird in den Pages-Einstellungen eine Custom Domain ein- oder ausgetragen, legt GitHub selbst
+> einen Commit an (Datei `CNAME`). Danach lokal `git pull`, sonst schlägt der nächste Push fehl.
+
+### Eigene Domain (optional, später)
+1. Domain kaufen (z. B. `joscheifele.de`, Stand 2026-10-23 noch nicht registriert)
+2. DNS beim Anbieter: vier `A`-Einträge für `@` → `185.199.108.153`, `185.199.109.153`,
+   `185.199.110.153`, `185.199.111.153`; vier `AAAA` → `2606:50c0:8000::153` bis `2606:50c0:8003::153`;
+   `CNAME` für `www` → `joscheifele.github.io`
+3. Repo → *Settings → Pages → Custom domain*: `joscheifele.de` (ohne `https://`, ohne `www`), danach `git pull`
+4. *Enforce HTTPS* anhaken, sobald das Zertifikat da ist
+5. Domain im Account verifizieren (*Settings → Pages → Add a domain*, TXT-Eintrag)
 
 ### Cloudflare Pages
 1. *Workers & Pages → Create → Pages → Connect to Git* → Repo wählen
@@ -214,6 +232,7 @@ Falls Chrome/Edge nicht gefunden wird: Umgebungsvariable `CHROME_PATH` setzen.
 | 2026-10-01 | Schriften lokal gehostet statt Google Fonts (DSGVO), Tests auf externe Requests ergänzt, Git-Historie vor der Veröffentlichung zu einem Commit zusammengefasst |
 | 2026-10-01 | Bachelorarbeit-Seite entschärft (YOLO statt YOLOv11, Labeling-Methoden allgemein); Impressum (`imprint.html`) und Datenschutzerklärung (`privacy.html`) mit Adress-Platzhaltern, Footer-Links auf allen Seiten, Tests inkl. Platzhalter-Warnung |
 | 2026-10-22 | Umzug auf neuen Rechner. Impressum/Datenschutz: nur Name + Düsseldorf + E-Mail (keine Straße), Hoster = GitHub Pages, DPF-Status von GitHub geprüft |
+| 2026-10-23 | Veröffentlicht: GitHub-Account in `JoScheifele` umbenannt, Repo `JoScheifele.github.io` (öffentlich), Pages aktiv unter <https://joscheifele.github.io/>; vorher geprüft: keine Originale im Repo, Kennzeichen unkenntlich, keine GPS-Daten in Bildern |
 
 ## 11. Mögliche nächste Schritte
 
