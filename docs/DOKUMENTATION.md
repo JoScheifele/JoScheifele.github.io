@@ -237,6 +237,7 @@ Status: Repo → *Actions*.
 | 2026-10-23 | Veröffentlicht: GitHub-Account in `JoScheifele` umbenannt, Repo `JoScheifele.github.io` (öffentlich), Pages aktiv unter <https://joscheifele.github.io/>; vorher geprüft: keine Originale im Repo, Kennzeichen unkenntlich, keine GPS-Daten in Bildern |
 | 2026-10-23 | Linkvorschau für LinkedIn & Co.: Open-Graph-Tags auf allen Seiten, 4 Vorschaubilder (`assets/img/og/`, erzeugt mit `node tools/og-cards.mjs`), statischer Test auf vollständige OG-Tags |
 | 2026-10-23 | Vorschaubilder überarbeitet (im LinkedIn-Feed zu unscharf): weniger Text, größere Schrift, kein feines Raster, PNG in doppelter Auflösung 2400 × 1260 statt JPG 1200 × 630 |
+| 2026-10-23 | Bugfix „Back to top" auf Unterseiten: Anker `#top` saß auf dem fixierten Header (Browser scrollt dorthin nicht) → `id="top"` jetzt auf `<body>`; Browser-Test für alle 6 Seiten |
 
 ## 11. Mögliche nächste Schritte
 

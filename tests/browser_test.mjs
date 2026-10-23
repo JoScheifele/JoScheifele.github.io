@@ -352,6 +352,21 @@ await test("Footer-Links führen zu Impressum und Datenschutz", async () => {
   assert(r.length === 2 && r[0].endsWith("/imprint.html") && r[1].endsWith("/privacy.html"), r.join(", "));
 });
 
+/* ================= „BACK TO TOP" (alle Seiten) ================= */
+// Ziel darf nicht der fixierte Header sein – der ist immer „sichtbar", der Browser scrollt dann nicht
+for (const page of ["/", "/projects/bachelor-thesis.html", "/projects/camera-model.html",
+                    "/projects/bmw-e46.html", "/imprint.html", "/privacy.html"]) {
+  await test(`${page}: „Back to top" scrollt nach oben`, async () => {
+    await load(1280, 800, false, page);
+    const y = await evaluate(`(async () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+      scrollTo(0, document.documentElement.scrollHeight);
+      const a = [...document.querySelectorAll('.site-footer a')].find(a => /back to top/i.test(a.textContent));
+      a.click(); await new Promise(r => setTimeout(r, 100)); return scrollY; })()`);
+    assert(y === 0, `scrollY nach Klick: ${y}`);
+  });
+}
+
 /* ================= DATENSCHUTZ (alle Seiten) ================= */
 await test("Alle Seiten: keine Requests an externe Server (z. B. Google Fonts)", async () =>
   assert(externalRequests.size === 0, [...externalRequests].join(", ")));
